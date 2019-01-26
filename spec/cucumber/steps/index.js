@@ -26,6 +26,10 @@ When(/^attaches a generic (.+) payload$/, function (payloadType) {
     }
 });
 
+When(/^without a (?:"|')([\w-]+)(?:"|') header set$/, function (headerName) {
+    this.request.unset(headerName);
+});
+
 When(/^sends the request$/, function (callback) {
     this.request
         .then((response) => {
