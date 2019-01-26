@@ -80,6 +80,5 @@ typings/
 .dynamodb/
 
 # Custom
-.vscode/
 .idea/
 dist/
