@@ -142,7 +142,7 @@ Then(/^the payload object should be added to the database, grouped under the "([
     this.type = type;
 
     client.get({
-        index: 'hobnob',
+        index: process.env.ELASTICSEARCH_INDEX,
         type,
         id: this.responsePayload,
     }).then((result) => {
@@ -153,7 +153,7 @@ Then(/^the payload object should be added to the database, grouped under the "([
 
 Then(/^the newly-created user should be deleted$/, function (callback) {
     client.delete({
-        index: 'hobnob',
+        index: process.env.ELASTICSEARCH_INDEX,
         type: this.type,
         id: this.responsePayload,
     }).then(function (res) {
