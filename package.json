@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rimraf dist && babel src -d dist",
     "serve": "yarn run build && dotenv -e envs/.env node dist/index.js",
-    "test": "yarn run build && dotenv -e envs/.env.test node dist/index.js",
+    "test:serve": "yarn run build && dotenv -e envs/.env.test node dist/index.js",
+    "test:watch": "nodemon -w src --exec yarn run test:serve",
     "test:e2e": "dotenv -e envs/.env.test cucumber-js -- spec/cucumber/features --require-module @babel/register --require spec/cucumber/steps",
     "watch": "nodemon -w src --exec yarn run serve",
     "fix": "eslint src --fix",
