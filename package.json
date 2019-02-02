@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && babel src -d dist",
+    "build": "rimraf dist && babel src -d dist --copy-files",
     "serve": "yarn run build && dotenv -e envs/.env node dist/index.js",
     "test:serve": "yarn run build && dotenv -e envs/.env.test node dist/index.js",
     "test:watch": "nodemon -w src --exec yarn run test:serve",
@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "ajv": "^6.7.0",
     "body-parser": "^1.18.3",
     "elasticsearch": "^15.3.1",
     "express": "^4.16.4"

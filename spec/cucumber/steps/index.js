@@ -85,6 +85,13 @@ When(/^attaches a valid (.+) payload$/, function (payloadType) {
         .set('Content-Type', 'application/json');
 });
 
+When(/^attaches (.+) as the payload$/, function (payload) {
+    this.requestPayload = JSON.parse(payload);
+    this.request
+        .send(payload)
+        .set('Content-Type', 'application/json');
+});
+
 When(/^without a (?:"|')([\w-]+)(?:"|') header set$/, function (headerName) {
     this.request.unset(headerName);
 });

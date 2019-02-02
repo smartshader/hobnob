@@ -37,6 +37,10 @@ function run_e2e_tests() {
         --require spec/cucumber/steps
 }
 
+function cleanup_es_test_index() {
+    curl --silent -o /dev/null -X DELETE "$ELASTICSEARCH_HOSTNAME:$ELASTICSEARCH_PORT/$ELASTICSEARCH_INDEX"
+}
+
 function terminate_all_processes() {
     kill -15 0
 }
@@ -46,4 +50,5 @@ check_api_server_not_running
 run_dependencies
 run_api_server
 run_e2e_tests
+cleanup_es_test_index
 terminate_all_processes

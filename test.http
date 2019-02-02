@@ -1,0 +1,22 @@
+### ES GET all indices
+GET http://localhost:9200/_all?pretty
+
+
+### ES DELETE index hobnob
+DELETE  http://localhost:9200/hobnob
+
+### ES DELETE index test
+DELETE  http://localhost:9200/test
+
+
+### API POST user
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+    "email": "e@ma.il",
+    "password": "Password",
+    "profile": {
+        "bio": "bar"
+    }
+}
