@@ -2,10 +2,30 @@
 
 RETRY_INTERVAL=${RETRY_INTERVAL:-0.2}
 
+function check_dependencies() {
+    dependencies=(
+        'docker'
+        'docker-compose'
+        'curl'
+        'ss'
+    )
+
+    for dep in "${dependencies[@]}"; do
+        executable_exists $dep
+    done
+}
+
+function executable_exists() {
+    if ! [ -x "$(command -v $1)" ]; then
+        echo "Error: $1 is not installed"
+        exit 1
+    fi
+}
+
 function check_api_server_not_running() {
     if ss -lnt | grep -q :$SERVER_PORT; then
         echo "Another process is already listening to port $SERVER_PORT"
-        exit 1;
+        exit 1
     fi
 }
 
@@ -46,6 +66,7 @@ function terminate_all_processes() {
 }
 
 
+check_dependencies
 check_api_server_not_running
 run_dependencies
 run_api_server
