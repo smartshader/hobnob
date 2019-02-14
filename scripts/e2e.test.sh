@@ -7,7 +7,6 @@ function check_dependencies() {
         'docker'
         'docker-compose'
         'curl'
-        'ss'
     )
 
     for dep in "${dependencies[@]}"; do
@@ -23,7 +22,7 @@ function executable_exists() {
 }
 
 function check_api_server_not_running() {
-    if ss -lnt | grep -q :$SERVER_PORT; then
+    if curl --silent $SERVER_HOSTNAME:$SERVER_PORT -o /dev/null; then
         echo "Another process is already listening to port $SERVER_PORT"
         exit 1
     fi
@@ -46,7 +45,7 @@ function run_api_server() {
     yarn run serve &
 
     # Wait until API server is ready
-    until ss -lnt | grep -q :$SERVER_PORT; do
+    until curl --silent $SERVER_HOSTNAME:$SERVER_PORT -o /dev/null; do
         sleep $RETRY_INTERVAL
     done
 }
